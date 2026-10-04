@@ -1,12 +1,12 @@
-import { Bodoni_Moda, Schibsted_Grotesk } from "next/font/google";
+import { Newsreader, Schibsted_Grotesk } from "next/font/google";
 import { site } from "@/content/site";
 import "./globals.css";
 
-const display = Bodoni_Moda({
+const display = Newsreader({
   subsets: ["latin", "latin-ext"],
   style: ["normal", "italic"],
   axes: ["opsz"],
-  variable: "--font-bodoni",
+  variable: "--font-newsreader",
   display: "swap",
 });
 

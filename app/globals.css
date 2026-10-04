@@ -7,7 +7,7 @@
   --ash: #8f8a82;
   --line: #2b2a27;
   --white: #ffffff;
-  --font-display: var(--font-bodoni), "Bodoni 72", Didot, Georgia, serif;
+  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
   --font-body: var(--font-schibsted), "Helvetica Neue", Arial, sans-serif;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -25,7 +25,7 @@ a { color: inherit; }
 .mono { font-family: var(--font-body); font-size: 13px; letter-spacing: 0.01em; font-variant-numeric: tabular-nums; }
 .eyebrow { font-family: var(--font-display); font-style: italic; font-size: clamp(1.05rem, 1.5vw, 1.25rem); color: var(--ash); }
 .ash { color: var(--ash); }
-h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0; text-wrap: balance; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 450; font-optical-sizing: auto; margin: 0; text-wrap: balance; }
 h2 { font-size: clamp(2rem, 4.6vw, 3.6rem); line-height: 1.02; letter-spacing: -0.01em; }
 p { margin: 0; }
 section { scroll-margin-top: var(--header-h); }
