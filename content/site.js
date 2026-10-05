@@ -21,7 +21,7 @@ export const hero = {
 export const works = {
   intro:
     "Svaki projekat počinje problemom klijenta, a završava se rezultatom koji može da se izmeri.",
-  // scene: privremena ilustracija dok ne stignu pravi radovi (vsl, product, narrative, app).
+  // youtube: ID videa iz linka (youtu.be/ID). Bez njega se prikazuje privremena ilustracija (scene).
   items: [
     {
       category: "VSL",
@@ -29,8 +29,7 @@ export const works = {
       desc: "Klijent. Problem u jednoj rečenici, rezultat u brojkama.",
       ratio: "16 / 9",
       ratioLabel: "16:9",
-      duration: "00:02:14",
-      scene: "vsl",
+      youtube: "JCNb1NS0M8k",
     },
     {
       category: "Showcase animacija",

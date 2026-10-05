@@ -1,4 +1,5 @@
 import Interactions from "@/components/Interactions";
+import WorkFrame from "@/components/WorkFrame";
 import { site, hero, works, proof, process, contact } from "@/content/site";
 
 const nav = [
@@ -90,19 +91,23 @@ export default function Home() {
               <ol className="track" id="track">
                 {works.items.map((w, i) => (
                   <li key={i} className={w.vertical ? "work vertical" : "work"}>
-                    <figure className="frame" style={{ "--ar": w.ratio }}>
-                      <canvas data-scene={w.scene} aria-hidden="true" />
-                      <span className="tag mono">Primer</span>
-                      <span className="play" aria-hidden="true">
-                        <svg viewBox="0 0 16 16">
-                          <path d="M3 1.5v13l11-6.5z" fill="currentColor" />
-                        </svg>
-                      </span>
-                      <figcaption className="frame-meta mono">
-                        <span>{w.ratioLabel}</span>
-                        <span>{w.duration}</span>
-                      </figcaption>
-                    </figure>
+                    {w.youtube ? (
+                      <WorkFrame work={w} />
+                    ) : (
+                      <figure className="frame" style={{ "--ar": w.ratio }}>
+                        <canvas data-scene={w.scene} aria-hidden="true" />
+                        <span className="tag mono">Primer</span>
+                        <span className="play" aria-hidden="true">
+                          <svg viewBox="0 0 16 16">
+                            <path d="M3 1.5v13l11-6.5z" fill="currentColor" />
+                          </svg>
+                        </span>
+                        <figcaption className="frame-meta mono">
+                          <span>{w.ratioLabel}</span>
+                          <span>{w.duration}</span>
+                        </figcaption>
+                      </figure>
+                    )}
                     <div className="work-meta">
                       <p className="mono ash">{w.category}</p>
                       <h3>{w.title}</h3>
