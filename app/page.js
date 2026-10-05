@@ -9,6 +9,19 @@ const nav = [
   { href: "#kontakt", label: "Kontakt" },
 ];
 
+// The one call to action: a dark pill inside a slowly turning chromatic ring and glow.
+function CallButton({ href, large = false }) {
+  return (
+    <a className={large ? "btn-glow btn-glow-lg" : "btn-glow"} href={href} target="_blank" rel="noopener">
+      <span className="glow" aria-hidden="true" />
+      <span className="btn-face">
+        <span className="dot" />
+        Zakaži poziv
+      </span>
+    </a>
+  );
+}
+
 const days = (s) => (s.start === s.end ? `D${s.start}` : `D${s.start}-D${s.end}`);
 const pad = (n) => String(n).padStart(2, "0");
 
@@ -27,10 +40,6 @@ export default function Home() {
               {n.label}
             </a>
           ))}
-          <a className="btn btn-solid" href={site.calendly} target="_blank" rel="noopener">
-            <span className="dot" />
-            Zakaži poziv
-          </a>
         </nav>
         <button className="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu">
           Meni
@@ -80,10 +89,7 @@ export default function Home() {
             </h1>
             <p className="hero-sub rise d2">{hero.sub}</p>
             <div className="hero-actions rise d3">
-              <a className="btn btn-solid btn-lg" href={site.calendly} target="_blank" rel="noopener">
-                <span className="dot" />
-                Zakaži poziv
-              </a>
+              <CallButton href={site.calendly} large />
               <a className="text-link" href="#radovi">
                 Pogledajte radove
               </a>
@@ -229,11 +235,8 @@ export default function Home() {
         </a>
       </footer>
 
-      <div className="cta-bar">
-        <a className="btn btn-solid" href={site.calendly} target="_blank" rel="noopener">
-          <span className="dot" />
-          Zakaži poziv
-        </a>
+      <div className="cta-dock" id="cta-dock" inert>
+        <CallButton href={site.calendly} />
       </div>
 
       <Interactions />

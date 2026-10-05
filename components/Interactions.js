@@ -123,6 +123,39 @@ export default function Interactions() {
       cleanups.push(() => io.disconnect());
     }
 
+    /* CTA: lives in the hero, docks at the bottom once that button has scrolled away */
+    const dock = document.getElementById("cta-dock");
+    const heroCta = document.querySelector(".hero-actions .btn-glow");
+    const setDock = (show) => { dock.classList.toggle("show", show); dock.inert = !show; };
+    const dio = new IntersectionObserver(([e]) => setDock(!e.isIntersecting && e.boundingClientRect.top < 0));
+    dio.observe(heroCta);
+    cleanups.push(() => dio.disconnect());
+
+    /* Process on phones: from the moment it is on screen, light one step every 2 s, D1 to D10, then again */
+    const mobile = matchMedia("(max-width: 820px)");
+    const clips = [...tl.querySelectorAll(".clip")].sort(
+      (a, b) => a.style.getPropertyValue("--s") - b.style.getPropertyValue("--s")
+    );
+    let cycle = 0, lit = 0, tlVisible = false;
+    const light = (i) => clips.forEach((c, j) => c.classList.toggle("on", i === j));
+    const startCycle = () => {
+      if (cycle || !mobile.matches || !tlVisible) return;
+      tl.classList.add("cycling");
+      lit = 0; light(lit);
+      cycle = setInterval(() => { lit = (lit + 1) % clips.length; light(lit); }, 2000);
+    };
+    const stopCycle = () => {
+      clearInterval(cycle); cycle = 0;
+      tl.classList.remove("cycling"); light(-1);
+    };
+    const cio = new IntersectionObserver(([e]) => {
+      tlVisible = e.isIntersecting;
+      if (tlVisible) startCycle(); else stopCycle();
+    }, { threshold: 0.3 });
+    cio.observe(tl);
+    on(mobile, "change", () => { stopCycle(); startCycle(); });
+    cleanups.push(() => { cio.disconnect(); stopCycle(); });
+
     /* Phone: frames below the fold open like a shutter as they scroll in */
     if (!reduce && !desktop.matches) {
       const ro = new IntersectionObserver((entries) => {
