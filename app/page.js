@@ -48,7 +48,20 @@ export default function Home() {
 
       <main>
         <section className="hero" id="pocetak">
-          <canvas className="hero-canvas" aria-hidden="true" />
+          <video
+            className="hero-video"
+            poster="/showreel/poster.jpg"
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            disablePictureInPicture
+            aria-hidden="true"
+            tabIndex={-1}
+          >
+            <source src="/showreel/showreel.webm" type="video/webm" />
+            <source src="/showreel/showreel.mp4" type="video/mp4" />
+          </video>
           <div className="slate mono" aria-hidden="true">
             <span className="rec">
               <i />

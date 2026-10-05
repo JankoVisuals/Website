@@ -40,72 +40,26 @@ export default function Interactions() {
     menu.querySelectorAll("a").forEach((a) => on(a, "click", () => setMenu(false)));
     on(document, "keydown", (e) => { if (e.key === "Escape" && menu.classList.contains("open")) setMenu(false); });
 
-    /* Hero: placeholder showreel light + running timecode */
-    const hc = document.querySelector(".hero-canvas");
-    const hx = hc.getContext("2d");
-    let hw = 1, hh = 1;
-    const sizeHero = () => {
-      const r = hc.getBoundingClientRect();
-      hc.width = Math.max(1, Math.round(r.width * 0.5));
-      hc.height = Math.max(1, Math.round(r.height * 0.5));
-      hw = hc.width; hh = hc.height;
-    };
-    const drawHero = (t) => {
-      hx.globalCompositeOperation = "source-over";
-      hx.fillStyle = "#0b0b0a";
-      hx.fillRect(0, 0, hw, hh);
-      hx.globalCompositeOperation = "lighter";
-      const m = Math.max(hw, hh);
-      const lights = [
-        [0.72 + 0.06 * Math.sin(t * 0.00011), 0.36 + 0.05 * Math.cos(t * 0.00009), 0.55, 0.2],
-        [0.24 + 0.05 * Math.cos(t * 0.00007), 0.62 + 0.04 * Math.sin(t * 0.00012), 0.42, 0.1],
-        [0.52 + 0.1 * Math.sin(t * 0.00005 + 1), 0.12, 0.32, 0.07],
-      ];
-      for (const [x, y, r, a] of lights) {
-        const g = hx.createRadialGradient(x * hw, y * hh, 0, x * hw, y * hh, r * m);
-        g.addColorStop(0, `rgba(236, 228, 214, ${a})`);
-        g.addColorStop(1, "rgba(236, 228, 214, 0)");
-        hx.fillStyle = g;
-        hx.fillRect(0, 0, hw, hh);
-      }
-      const sx = clamp(0.72 + 0.06 * Math.sin(t * 0.00011), 0.05, 0.95);
-      const sy = hh * (0.36 + 0.05 * Math.cos(t * 0.00009));
-      const sg = hx.createLinearGradient(0, 0, hw, 0);
-      sg.addColorStop(0, "rgba(205, 214, 222, 0)");
-      sg.addColorStop(sx, "rgba(205, 214, 222, 0.22)");
-      sg.addColorStop(1, "rgba(205, 214, 222, 0)");
-      hx.fillStyle = sg;
-      hx.fillRect(0, sy - 0.75, hw, 1.5);
-      hx.globalCompositeOperation = "source-over";
-      const v = hx.createRadialGradient(hw / 2, hh / 2, Math.min(hw, hh) * 0.3, hw / 2, hh / 2, m * 0.75);
-      v.addColorStop(0, "rgba(11, 11, 10, 0)");
-      v.addColorStop(1, "rgba(11, 11, 10, 0.85)");
-      hx.fillStyle = v;
-      hx.fillRect(0, 0, hw, hh);
-    };
+    /* Hero: muted showreel + timecode synced to it */
+    const hv = document.querySelector(".hero-video");
     const tcEl = document.getElementById("tc");
-    const timecode = (ms) => {
-      const f = Math.floor(ms / 40);
+    const timecode = (sec) => {
+      const f = Math.floor(sec * 25);
       return `${pad(Math.floor(f / 90000))}:${pad(Math.floor(f / 1500) % 60)}:${pad(Math.floor(f / 25) % 60)}:${pad(f % 25)}`;
     };
-    let heroVisible = true;
-    let raf = 0;
-    const start = performance.now();
-    const loop = (now) => {
-      if (heroVisible) {
-        drawHero(now);
-        tcEl.textContent = timecode(now - start);
-      }
-      raf = requestAnimationFrame(loop);
-    };
-    sizeHero();
-    drawHero(0);
-    if (!reduce) {
-      const hio = new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; });
-      hio.observe(hc);
-      cleanups.push(() => hio.disconnect());
-      raf = requestAnimationFrame(loop);
-      cleanups.push(() => cancelAnimationFrame(raf));
+    const saveData = navigator.connection && navigator.connection.saveData;
+    if (!reduce && !saveData) {
+      hv.preload = "auto";
+      const play = () => { const p = hv.play(); if (p) p.catch(() => {}); };
+      let raf = 0;
+      const tick = () => { tcEl.textContent = timecode(hv.currentTime); raf = requestAnimationFrame(tick); };
+      const hio = new IntersectionObserver(([e]) => {
+        cancelAnimationFrame(raf);
+        if (e.isIntersecting) { play(); raf = requestAnimationFrame(tick); }
+        else hv.pause();
+      });
+      hio.observe(hv);
+      cleanups.push(() => { hio.disconnect(); cancelAnimationFrame(raf); hv.pause(); });
     }
 
     /* Work stills */
@@ -205,7 +159,7 @@ export default function Interactions() {
       requestAnimationFrame(() => { onHeader(); onWorks(); ticking = false; });
     }, { passive: true });
     let rt;
-    const relayout = () => { sizeHero(); if (reduce) drawHero(0); layoutWorks(); drawFrames(); onWorks(); };
+    const relayout = () => { layoutWorks(); drawFrames(); onWorks(); };
     on(window, "resize", () => { clearTimeout(rt); rt = setTimeout(relayout, 120); });
     on(desktop, "change", relayout);
     relayout();
