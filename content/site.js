@@ -24,9 +24,9 @@ export const works = {
   // youtube: ID videa iz linka (youtu.be/ID). Bez njega se prikazuje privremena ilustracija (scene).
   items: [
     {
-      category: "VSL",
-      title: "Naziv projekta",
-      desc: "Klijent. Problem u jednoj rečenici, rezultat u brojkama.",
+      category: "Prezentaciona animacija",
+      title: "Asserta",
+      desc: "Tech Tailors. Aplikacija je postala jasna i onima koji nisu IT stručnjaci, a to je donelo veću prodaju.",
       ratio: "16 / 9",
       ratioLabel: "16:9",
       youtube: "JCNb1NS0M8k",
