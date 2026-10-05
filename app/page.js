@@ -27,7 +27,7 @@ export default function Home() {
               {n.label}
             </a>
           ))}
-          <a className="btn btn-solid" href="#kontakt">
+          <a className="btn btn-solid" href={site.calendly} target="_blank" rel="noopener">
             <span className="dot" />
             Zakaži poziv
           </a>
@@ -67,7 +67,7 @@ export default function Home() {
             </h1>
             <p className="hero-sub rise d2">{hero.sub}</p>
             <div className="hero-actions rise d3">
-              <a className="btn btn-solid btn-lg" href="#kontakt">
+              <a className="btn btn-solid btn-lg" href={site.calendly} target="_blank" rel="noopener">
                 <span className="dot" />
                 Zakaži poziv
               </a>
@@ -217,7 +217,7 @@ export default function Home() {
       </footer>
 
       <div className="cta-bar">
-        <a className="btn btn-solid" href="#kontakt">
+        <a className="btn btn-solid" href={site.calendly} target="_blank" rel="noopener">
           <span className="dot" />
           Zakaži poziv
         </a>

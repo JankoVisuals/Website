@@ -3,8 +3,7 @@
 export const site = {
   name: "Janko Visuals",
   email: "jankovisuals@gmail.com",
-  // Privremeno: zameniti pravim Calendly linkom.
-  calendly: "https://calendly.com/",
+  calendly: "https://calendly.com/jankovisuals/30min",
   description:
     "Video koji izgleda tačno onako kako ste ga zamislili. VSL, igrane forme i animacije proizvoda za 10 dana.",
 };
