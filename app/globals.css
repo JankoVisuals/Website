@@ -147,11 +147,11 @@ section { scroll-margin-top: var(--header-h); }
 .playhead::before { content: ""; position: absolute; top: -2px; left: -5px; border: 5px solid transparent; border-top: 7px solid var(--bone); }
 
 /* Contact */
-.contact { padding: clamp(96px, 16vh, 180px) var(--gutter) clamp(64px, 10vh, 120px); border-top: 1px solid var(--line); display: grid; gap: 40px; }
-.contact h2 { font-size: clamp(2.4rem, 6vw, 5rem); max-width: 16ch; }
+.contact { padding: clamp(96px, 16vh, 180px) var(--gutter) clamp(64px, 10vh, 120px); border-top: 1px solid var(--line); display: grid; gap: 40px; justify-items: center; text-align: center; }
+.contact h2 { font-size: clamp(2.4rem, 6vw, 5rem); max-width: 16ch; margin-inline: auto; }
 .contact h2 em { font-style: italic; }
-.contact-row { display: flex; flex-wrap: wrap; align-items: center; gap: 24px 40px; }
-.mail { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+.contact-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 24px 40px; }
+.mail { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 14px; }
 #copy span { display: inline-block; transition: filter 200ms ease, opacity 200ms ease; }
 #copy.swap span { filter: blur(2px); opacity: 0; }
 .mail-addr { font-size: 18px; user-select: all; overflow-wrap: anywhere; }
@@ -171,7 +171,8 @@ section { scroll-margin-top: var(--header-h); }
   .works-pin { position: static; height: auto; padding-block: 72px 24px; gap: 32px; }
   .works { height: auto !important; }
   .track { flex-direction: column; width: auto; transform: none !important; gap: 48px; }
-  .work { width: 100%; }
+  .work { width: 100%; justify-items: center; text-align: center; }
+  .work-meta { justify-items: center; margin-inline: auto; }
   .frame { height: auto; width: 100%; }
   .work.vertical .frame { width: min(72%, 320px); }
   .works-foot { display: none; }
