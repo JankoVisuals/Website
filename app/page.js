@@ -11,7 +11,7 @@ const nav = [
 
 // The one call to action: a glass capsule holding a record-button knob. The knob's metal ring
 // catches a slow, hot, iridescent light, like heated alloy or a coated lens element.
-function CallButton({ href, large = false }) {
+function CallButton({ href, large = false, label = "Zakaži poziv" }) {
   return (
     <a className={large ? "btn-alloy btn-alloy-lg" : "btn-alloy"} href={href} target="_blank" rel="noopener">
       <span className="knob" aria-hidden="true">
@@ -35,7 +35,7 @@ function CallButton({ href, large = false }) {
           </span>
         </span>
       </span>
-      <span className="btn-label">Zakaži poziv</span>
+      <span className="btn-label">{label}</span>
     </a>
   );
 }
@@ -229,10 +229,7 @@ export default function Home() {
             <em>{contact.titleEmphasis}</em>
           </h2>
           <div className="contact-row">
-            <a className="btn btn-solid btn-lg" href={site.calendly} target="_blank" rel="noopener">
-              <span className="dot" />
-              Zakaži uvodni poziv
-            </a>
+            <CallButton href={site.calendly} large label="Zakaži uvodni poziv" />
             <div className="mail">
               <span className="mono ash">ili pišite na</span>
               <a className="mail-addr" id="mail" href={`mailto:${site.email}`} style={{ textDecoration: "none" }}>

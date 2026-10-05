@@ -123,12 +123,23 @@ export default function Interactions() {
       cleanups.push(() => io.disconnect());
     }
 
-    /* CTA: lives in the hero, docks at the bottom once that button has scrolled away */
+    /* CTA: lives in the hero, docks at the bottom once that button has scrolled away,
+       and steps aside again when the contact section's own button comes into view */
     const dock = document.getElementById("cta-dock");
     const heroCta = document.querySelector(".hero-actions .btn-alloy");
-    const setDock = (show) => { dock.classList.toggle("show", show); dock.inert = !show; };
-    const dio = new IntersectionObserver(([e]) => setDock(!e.isIntersecting && e.boundingClientRect.top < 0));
+    const contactCta = document.querySelector(".contact .btn-alloy");
+    let heroGone = false, atContact = false;
+    const dio = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.target === heroCta) heroGone = !e.isIntersecting && e.boundingClientRect.top < 0;
+        else atContact = e.isIntersecting || e.boundingClientRect.top < 0;
+      }
+      const show = heroGone && !atContact;
+      dock.classList.toggle("show", show);
+      dock.inert = !show;
+    });
     dio.observe(heroCta);
+    dio.observe(contactCta);
     cleanups.push(() => dio.disconnect());
 
     /* Process on phones: from the moment it is on screen, light one step every 2 s, D1 to D10, then again */
