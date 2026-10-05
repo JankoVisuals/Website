@@ -9,15 +9,33 @@ const nav = [
   { href: "#kontakt", label: "Kontakt" },
 ];
 
-// The one call to action: a dark pill inside a slowly turning chromatic ring and glow.
+// The one call to action: a glass capsule holding a record-button knob. The knob's metal ring
+// catches a slow, hot, iridescent light, like heated alloy or a coated lens element.
 function CallButton({ href, large = false }) {
   return (
-    <a className={large ? "btn-glow btn-glow-lg" : "btn-glow"} href={href} target="_blank" rel="noopener">
-      <span className="glow" aria-hidden="true" />
-      <span className="btn-face">
-        <span className="dot" />
-        Zakaži poziv
+    <a className={large ? "btn-alloy btn-alloy-lg" : "btn-alloy"} href={href} target="_blank" rel="noopener">
+      <span className="knob" aria-hidden="true">
+        <span className="knob-ring">
+          <i className="lit film" />
+          <i className="lit spec" />
+          <i className="lit hot" />
+        </span>
+        <span className="knob-face">
+          <span className="knob-dot" />
+        </span>
+        <span className="knob-glow halo">
+          <span className="knob-src">
+            <i className="lit hot" />
+          </span>
+        </span>
+        <span className="knob-glow bloom">
+          <span className="knob-src">
+            <i className="lit spec" />
+            <i className="lit hot" />
+          </span>
+        </span>
       </span>
+      <span className="btn-label">Zakaži poziv</span>
     </a>
   );
 }

@@ -125,7 +125,7 @@ export default function Interactions() {
 
     /* CTA: lives in the hero, docks at the bottom once that button has scrolled away */
     const dock = document.getElementById("cta-dock");
-    const heroCta = document.querySelector(".hero-actions .btn-glow");
+    const heroCta = document.querySelector(".hero-actions .btn-alloy");
     const setDock = (show) => { dock.classList.toggle("show", show); dock.inert = !show; };
     const dio = new IntersectionObserver(([e]) => setDock(!e.isIntersecting && e.boundingClientRect.top < 0));
     dio.observe(heroCta);
