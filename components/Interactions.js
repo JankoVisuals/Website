@@ -142,7 +142,7 @@ export default function Interactions() {
     dio.observe(contactCta);
     cleanups.push(() => dio.disconnect());
 
-    /* Process on phones: from the moment it is on screen, light one step every 2 s, D1 to D10, then again */
+    /* Process on phones: from the moment it is on screen, light one step every 2 s, Dan 1 to Dan 10, then again */
     const mobile = matchMedia("(max-width: 820px)");
     const clips = [...tl.querySelectorAll(".clip")].sort(
       (a, b) => a.style.getPropertyValue("--s") - b.style.getPropertyValue("--s")

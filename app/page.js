@@ -40,7 +40,7 @@ function CallButton({ href, large = false, label = "Zakaži poziv" }) {
   );
 }
 
-const days = (s) => (s.start === s.end ? `D${s.start}` : `D${s.start}-D${s.end}`);
+const days = (s) => (s.start === s.end ? `Dan ${s.start}` : `Dan ${s.start}-${s.end}`);
 const pad = (n) => String(n).padStart(2, "0");
 
 export default function Home() {
@@ -198,7 +198,7 @@ export default function Home() {
             <div className="tl-ruler mono" aria-hidden="true">
               <span />
               {Array.from({ length: 10 }, (_, i) => (
-                <span key={i}>D{i + 1}</span>
+                <span key={i}>Dan {i + 1}</span>
               ))}
             </div>
             <div className="tl-tracks">
