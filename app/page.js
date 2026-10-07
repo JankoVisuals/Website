@@ -128,7 +128,7 @@ export default function Home() {
               <ol className="track" id="track">
                 {works.items.map((w, i) => (
                   <li key={i} className={w.vertical ? "work vertical" : "work"}>
-                    {w.youtube ? (
+                    {w.youtube || w.video ? (
                       <WorkFrame work={w} />
                     ) : (
                       <figure className="frame" style={{ "--ar": w.ratio }}>

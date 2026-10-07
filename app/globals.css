@@ -289,26 +289,26 @@ section { scroll-margin-top: var(--header-h); }
 
 /* Works with a real video: the card is only the picture; the film opens full screen */
 .frame .poster { position: absolute; inset: 0; padding: 0; border: 0; background: var(--ink-2); color: inherit; font: inherit; cursor: pointer; overflow: hidden; -webkit-tap-highlight-color: transparent; }
-.frame .poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9); transition: transform 700ms var(--ease-out), filter 500ms ease; }
+.frame .poster img, .frame .poster video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9); transition: transform 700ms var(--ease-out), filter 500ms ease; }
 .frame .poster:focus-visible { outline: 1px solid var(--bone); outline-offset: -1px; }
 /* The cue follows the cursor: a word, not a button. */
 .cue { position: absolute; top: 0; left: 0; pointer-events: none; display: none; }
 .cue span { display: block; transform: translate(14px, 14px); font-family: var(--font-display); font-style: italic; font-size: 19px; color: var(--bone); text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5); opacity: 0; transition: opacity 180ms ease; }
 @media (hover: hover) and (pointer: fine) {
   .cue { display: block; }
-  .frame:hover .poster img { transform: scale(1.02); filter: brightness(1); }
+  .frame:hover .poster img, .frame:hover .poster video { transform: scale(1.02); filter: brightness(1); }
   .frame:hover .cue span { opacity: 1; }
 }
 
 .theater { position: fixed; inset: 0; width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: rgba(11, 11, 10, 0.96); color: var(--bone); display: none; place-items: center; }
 .theater[open] { display: grid; animation: theater-in 260ms var(--ease-out); }
 .theater::backdrop { background: transparent; }
-.theater-screen { position: relative; aspect-ratio: var(--ar); width: min(92vw, calc(84dvh * (16 / 9))); max-height: 84dvh; background: #000; }
-.theater-screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.theater-screen { position: relative; aspect-ratio: var(--ar); width: min(92vw, calc(84dvh * var(--arn, 1.7778))); max-height: 84dvh; background: #000; }
+.theater-screen iframe, .theater-screen video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .theater-close { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 18px); right: var(--gutter); background: none; border: 0; padding: 8px 0; color: var(--ash); font: 500 14px var(--font-body); cursor: pointer; transition: color 160ms ease; }
 .theater-close:hover, .theater-close:focus-visible { color: var(--bone); }
 @keyframes theater-in { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) {
-  .frame .poster img { transition: none; }
+  .frame .poster img, .frame .poster video { transition: none; }
 }
 html:has(.theater[open]) { overflow: hidden; }

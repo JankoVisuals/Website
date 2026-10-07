@@ -20,7 +20,8 @@ export const hero = {
 export const works = {
   intro:
     "Svaki projekat počinje problemom klijenta, a završava se rezultatom koji može da se izmeri.",
-  // youtube: ID videa iz linka (youtu.be/ID). Bez njega se prikazuje privremena ilustracija (scene).
+  // youtube: ID videa iz linka (youtu.be/ID), ili video: fajl iz public/works sa poster slikom.
+  // Bez njih se prikazuje privremena ilustracija (scene).
   items: [
     {
       category: "Prezentaciona animacija",
@@ -29,6 +30,16 @@ export const works = {
       ratio: "16 / 9",
       ratioLabel: "16:9",
       youtube: "JCNb1NS0M8k",
+    },
+    {
+      category: "Stop motion",
+      title: "Showroom Jesen",
+      desc: "SANCREA Srbija. Kolekcija stolica u stop motion tehnici, kao katalog koji se gleda do kraja.",
+      ratio: "9 / 16",
+      ratioLabel: "9:16",
+      video: "/works/sancrea-jesen.mp4",
+      poster: "/works/sancrea-jesen.jpg",
+      vertical: true,
     },
     {
       category: "Showcase animacija",
@@ -47,16 +58,6 @@ export const works = {
       ratioLabel: "2.39:1",
       duration: "00:01:30",
       scene: "narrative",
-    },
-    {
-      category: "Animacija aplikacije",
-      title: "Naziv projekta",
-      desc: "Klijent. Za društvene mreže.",
-      ratio: "9 / 16",
-      ratioLabel: "9:16",
-      duration: "00:00:30",
-      scene: "app",
-      vertical: true,
     },
   ],
 };
