@@ -219,8 +219,30 @@ section { scroll-margin-top: var(--header-h); }
 .clip-days { color: var(--ash); font-size: 11px; }
 .clip.final { background: var(--bone); color: var(--ink); border-color: var(--bone); }
 .clip.final .clip-days { color: var(--ink); opacity: 0.6; }
-.playhead { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--bone); left: calc(var(--label) + 4px + (100% - var(--label) - 4px) * var(--p, 1)); pointer-events: none; }
+.playhead { position: absolute; top: var(--pad, 0px); bottom: var(--pad, 0px); width: 1px; background: var(--bone); pointer-events: none;
+  left: calc(var(--pad, 0px) + var(--label) + 4px + (100% - 2 * var(--pad, 0px) - var(--label) - 4px) * var(--p, 1)); }
 .playhead::before { content: ""; position: absolute; top: -2px; left: -5px; border: 5px solid transparent; border-top: 7px solid var(--bone); }
+
+/* Desktop process reads as an edit page timeline: blue video clips on V1, green audio on A1, and a red playhead that
+   plays 2 s per day and selects every clip it is over, with the orange outline a selected layer gets in DaVinci Resolve. */
+@media (min-width: 821px) {
+  .tl { --label: 48px; --pad: 16px; --sel: #ff5b2b; padding: var(--pad); background: #141416; border: 1px solid #26262b; border-radius: 10px; gap: 6px; }
+  .tl-ruler span { color: #8d8d94; border-left-color: #3b3b42; padding: 0 0 13px 5px;
+    background: repeating-linear-gradient(90deg, #3b3b42 0 1px, transparent 1px 25%) left bottom / 100% 5px no-repeat; }
+  .tl-ruler span:first-child { background: none; }
+  .tl-tracks { gap: 4px; }
+  .tl-track { padding: 4px 0; background: #1a1a1d; border-radius: 4px; }
+  .track-label { justify-self: center; align-self: center; padding: 3px 7px; border-radius: 4px; background: #2a2a30; color: #d4d4d9; font-weight: 600; letter-spacing: 0.02em; }
+  .tl .clip { border-radius: 4px; color: #fff; gap: 6px; padding: 8px 10px; }
+  .tl .clip.video { background: linear-gradient(180deg, #5584ba 0%, #426fa3 100%); border-color: #6c9bd0; }
+  .tl .clip.audio { justify-content: flex-start; min-height: 86px; border-color: #5fa772; background: linear-gradient(180deg, #46905a 0%, #387748 100%); }
+  .tl .clip.audio::after { content: ""; height: 24px; margin: auto -6px 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='144' height='28'%3E%3Cpath fill='%23bdebc6' d='M0 10h2v8h-2zM3 4.5h2v19h-2zM6 7.5h2v13h-2zM9 7.5h2v13h-2zM12 3.5h2v21h-2zM15 4.5h2v19h-2zM18 6h2v16h-2zM21 3h2v22h-2zM24 3h2v22h-2zM27 4.5h2v19h-2zM30 3.5h2v21h-2zM33 4.5h2v19h-2zM36 3.5h2v21h-2zM39 7.5h2v13h-2zM42 7.5h2v13h-2zM45 6h2v16h-2zM48 7h2v14h-2zM51 10.5h2v7h-2zM54 8.5h2v11h-2zM57 10h2v8h-2zM60 9.5h2v9h-2zM63 8.5h2v11h-2zM66 10.5h2v7h-2zM69 8h2v12h-2zM72 5.5h2v17h-2zM75 6h2v16h-2zM78 5.5h2v17h-2zM81 5.5h2v17h-2zM84 2.5h2v23h-2zM87 2h2v24h-2zM90 5.5h2v17h-2zM93 6h2v16h-2zM96 2h2v24h-2zM99 6h2v16h-2zM102 7h2v14h-2zM105 6.5h2v15h-2zM108 6h2v16h-2zM111 7h2v14h-2zM114 4h2v20h-2zM117 6.5h2v15h-2zM120 6.5h2v15h-2zM123 6.5h2v15h-2zM126 10.5h2v7h-2zM129 10.5h2v7h-2zM132 10.5h2v7h-2zM135 10h2v8h-2zM138 9.5h2v9h-2zM141 9.5h2v9h-2z'/%3E%3C/svg%3E") left center / auto 24px repeat-x; }
+  .tl .clip .clip-name { font-size: 13px; text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25); }
+  .tl .clip .clip-days { color: rgba(255, 255, 255, 0.72); opacity: 1; }
+  .tl .clip.sel { border-color: var(--sel); box-shadow: inset 0 0 0 1px var(--sel); }
+  .playhead { width: 1px; background: #ff3b30; box-shadow: 0 0 6px rgba(255, 59, 48, 0.45); }
+  .playhead::before { top: -1px; left: -6px; width: 13px; height: 15px; border: 0; background: #ff3b30; clip-path: polygon(0 0, 100% 0, 100% 62%, 50% 100%, 0 62%); }
+}
 
 /* Contact */
 .contact { padding: clamp(96px, 16vh, 180px) var(--gutter) clamp(64px, 10vh, 120px); border-top: 1px solid var(--line); display: grid; gap: 40px; justify-items: center; text-align: center; }

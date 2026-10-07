@@ -204,11 +204,11 @@ export default function Home() {
             <div className="tl-tracks">
               {tracks.map((steps, t) => (
                 <div className="tl-track" key={t}>
-                  <span className="track-label mono">V{t + 1}</span>
+                  <span className="track-label mono">{t === 0 ? "V1" : "A1"}</span>
                   {steps.map((s) => (
                     <div
                       key={s.name}
-                      className={s.final ? "clip final" : "clip"}
+                      className={`clip ${t === 0 ? "video" : "audio"}${s.final ? " final" : ""}`}
                       style={{ "--s": s.start, "--e": s.end }}
                     >
                       <span className="clip-name">{s.name}</span>

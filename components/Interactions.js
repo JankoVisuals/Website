@@ -103,25 +103,35 @@ export default function Interactions() {
       countEl.textContent = pad(Math.round(p * (items - 1)) + 1);
     };
 
-    /* Process: playhead sweeps the 10 days once when the timeline comes into view */
+    /* Process on desktop: the timeline plays like an edit page. The red playhead takes 2 s per day,
+       holds on delivery, loops, and selects every clip it is over. */
     const tl = document.getElementById("tl");
-    if (!reduce) {
-      const io = new IntersectionObserver(([e]) => {
-        if (!e.isIntersecting) return;
-        io.disconnect();
-        const t0 = performance.now(), dur = 2600;
-        const step = (now) => {
-          const k = clamp((now - t0) / dur, 0, 1);
-          const eased = 1 - Math.pow(1 - k, 3);
-          tl.style.setProperty("--p", eased.toFixed(4));
-          if (k < 1) requestAnimationFrame(step);
-        };
-        tl.style.setProperty("--p", "0");
-        requestAnimationFrame(step);
-      }, { threshold: 0.5 });
-      io.observe(tl);
-      cleanups.push(() => io.disconnect());
-    }
+    const playhead = document.getElementById("playhead");
+    const wide = matchMedia("(min-width: 821px)");
+    const tlClips = [...tl.querySelectorAll(".clip")].map((c) => [c, +c.style.getPropertyValue("--s"), +c.style.getPropertyValue("--e")]);
+    const DAY = 2000, HOLD = 1500, LOOP = 10 * DAY + HOLD;
+    let at = 0, last = 0, playRaf = 0, tlInView = false;
+    const seek = (p) => {
+      playhead.style.setProperty("--p", p.toFixed(5));
+      const d = Math.min(p * 10, 9.999);
+      for (const [c, s, e] of tlClips) c.classList.toggle("sel", d >= s - 1 && d < e);
+    };
+    const play = (now) => {
+      at = (at + Math.min(now - last, 100)) % LOOP;
+      last = now;
+      seek(Math.min(at / (10 * DAY), 1));
+      playRaf = requestAnimationFrame(play);
+    };
+    const syncPlay = () => {
+      const go = tlInView && wide.matches && !reduce;
+      if (go && !playRaf) { last = performance.now(); playRaf = requestAnimationFrame(play); }
+      if (!go && playRaf) { cancelAnimationFrame(playRaf); playRaf = 0; }
+    };
+    seek(reduce ? 1 : 0);
+    const pio = new IntersectionObserver(([e]) => { tlInView = e.isIntersecting; syncPlay(); }, { threshold: 0.3 });
+    pio.observe(tl);
+    on(wide, "change", syncPlay);
+    cleanups.push(() => { pio.disconnect(); cancelAnimationFrame(playRaf); });
 
     /* CTA: lives in the hero, docks at the bottom once that button has scrolled away,
        and steps aside again when the contact section's own button comes into view */
