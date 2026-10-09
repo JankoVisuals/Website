@@ -42,6 +42,16 @@ export const works = {
       vertical: true,
     },
     {
+      category: "Reels",
+      title: "Well Done",
+      desc: "Steak House Well Done. Atmosfera restorana od kuhinje do stola, za društvene mreže.",
+      ratio: "9 / 16",
+      ratioLabel: "9:16",
+      video: "/works/well-done.mp4",
+      poster: "/works/well-done.jpg",
+      vertical: true,
+    },
+    {
       category: "Showcase animacija",
       title: "Naziv projekta",
       desc: "Klijent. Šta je proizvod i šta je video promenio.",
