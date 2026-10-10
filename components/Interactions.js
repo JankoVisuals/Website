@@ -76,33 +76,6 @@ export default function Interactions() {
       }
     };
 
-    /* Works: vertical scroll drives the horizontal reel on desktop */
-    const works = document.getElementById("radovi");
-    const track = document.getElementById("track");
-    const viewport = track.parentElement;
-    const progress = document.getElementById("progress");
-    const countEl = document.getElementById("count");
-    const items = track.children.length;
-    let dist = 0;
-    const layoutWorks = () => {
-      if (desktop.matches) {
-        dist = Math.max(0, track.scrollWidth - viewport.clientWidth);
-        works.style.height = `${window.innerHeight + dist}px`;
-      } else {
-        dist = 0;
-        works.style.height = "";
-        track.style.transform = "";
-      }
-    };
-    const onWorks = () => {
-      if (!desktop.matches || dist === 0) return;
-      const top = works.getBoundingClientRect().top;
-      const p = clamp(-top / dist, 0, 1);
-      track.style.transform = `translate3d(${-p * dist}px, 0, 0)`;
-      progress.style.transform = `scaleX(${p})`;
-      countEl.textContent = pad(Math.round(p * (items - 1)) + 1);
-    };
-
     /* Process on desktop: the timeline plays like an edit page. The red playhead takes 2 s per day,
        holds on delivery, loops, and selects every clip it is over. */
     const tl = document.getElementById("tl");
@@ -210,15 +183,14 @@ export default function Interactions() {
     on(window, "scroll", () => {
       if (ticking) return;
       ticking = true;
-      requestAnimationFrame(() => { onHeader(); onWorks(); ticking = false; });
+      requestAnimationFrame(() => { onHeader(); ticking = false; });
     }, { passive: true });
     let rt;
-    const relayout = () => { layoutWorks(); drawFrames(); onWorks(); };
+    const relayout = () => { drawFrames(); };
     on(window, "resize", () => { clearTimeout(rt); rt = setTimeout(relayout, 120); });
     on(desktop, "change", relayout);
     relayout();
     onHeader();
-    if (document.fonts?.ready) document.fonts.ready.then(() => { layoutWorks(); onWorks(); });
 
     return () => { clearTimeout(rt); cleanups.forEach((fn) => fn()); };
   }, []);

@@ -21,7 +21,7 @@ export const works = {
   intro:
     "Svaki projekat počinje problemom klijenta, a završava se rezultatom koji može da se izmeri.",
   // youtube: ID videa iz linka (youtu.be/ID), ili video: fajl iz public/works sa poster slikom.
-  // Bez njih se prikazuje privremena ilustracija (scene).
+  // Na sajtu se prikazuju samo radovi koji imaju jedno od ta dva.
   items: [
     {
       category: "Prezentaciona animacija",
