@@ -8,13 +8,21 @@ import WorkFrame from "./WorkFrame";
 // a computer; the second column starts lower, so the grid never reads as rows.
 const wide = "(min-width: 821px)";
 
+// Each work goes to the shortest column, in order, but never under a work by the same
+// client, and preferably not beside one either, so one client's films stay apart.
 function distribute(items, cols) {
   const columns = Array.from({ length: cols }, () => ({ h: 0, items: [] }));
+  const has = (c, client) => c && c.items.some((w) => w.client === client);
   for (const w of items) {
     const [a, b] = w.ratio.split("/").map(Number);
-    const target = columns.reduce((min, c) => (c.h < min.h ? c : min));
-    target.items.push(w);
-    target.h += b / a;
+    const score = (c, i) =>
+      c.h + (has(c, w.client) ? 100 : 0) + (has(columns[i - 1], w.client) || has(columns[i + 1], w.client) ? 0.5 : 0);
+    let best = 0;
+    columns.forEach((c, i) => {
+      if (score(c, i) < score(columns[best], best)) best = i;
+    });
+    columns[best].items.push(w);
+    columns[best].h += b / a;
   }
   return columns.map((c) => c.items);
 }

@@ -21,29 +21,13 @@ export const works = {
   intro:
     "Svaki projekat počinje problemom klijenta, a završava se rezultatom koji može da se izmeri.",
   // youtube: ID videa iz linka (youtu.be/ID), ili video: fajl iz public/works sa poster slikom.
-  // Na sajtu se prikazuju samo radovi koji imaju jedno od ta dva.
+  // Na sajtu se prikazuju samo radovi koji imaju jedno od ta dva, redom kojim su ovde
+  // navedeni. client: radovi istog klijenta se u feedu nikad ne slažu jedan uz drugi.
   items: [
-    {
-      category: "Prezentaciona animacija",
-      title: "Asserta",
-      desc: "Tech Tailors. Aplikacija je postala jasna i onima koji nisu IT stručnjaci, a to je donelo veću prodaju.",
-      ratio: "16 / 9",
-      ratioLabel: "16:9",
-      youtube: "JCNb1NS0M8k",
-    },
-    {
-      category: "Stop motion",
-      title: "Showroom Jesen",
-      desc: "SANCREA Srbija. Kolekcija stolica u stop motion tehnici, kao katalog koji se gleda do kraja.",
-      ratio: "9 / 16",
-      ratioLabel: "9:16",
-      video: "/works/sancrea-jesen.mp4",
-      poster: "/works/sancrea-jesen.jpg",
-      vertical: true,
-    },
     {
       category: "Reels",
       title: "Well Done",
+      client: "Well Done",
       desc: "Steak House Well Done. Atmosfera restorana od kuhinje do stola, za društvene mreže.",
       ratio: "9 / 16",
       ratioLabel: "9:16",
@@ -53,22 +37,35 @@ export const works = {
     },
     {
       category: "Reels",
-      title: "Veče uz živu svirku",
-      desc: "Steak House Well Done. Muzika, hrana i gosti u jednom kadru, kao poziv na sledeće veče.",
-      ratio: "9 / 16",
-      ratioLabel: "9:16",
-      video: "/works/well-done-2.mp4",
-      poster: "/works/well-done-2.jpg",
-      vertical: true,
-    },
-    {
-      category: "Reels",
       title: "Savršena venčanica",
+      client: "LovelyBride",
       desc: "LovelyBride. Trenutak kada mlada pronađe svoju venčanicu, za društvene mreže salona.",
       ratio: "9 / 16",
       ratioLabel: "9:16",
       video: "/works/lovelybride.mp4",
       poster: "/works/lovelybride.jpg",
+      vertical: true,
+    },
+    {
+      category: "Stop motion",
+      title: "Barske stolice",
+      client: "SANCREA",
+      desc: "SANCREA Srbija. Kolekcija barskih stolica u stop motion tehnici, kao katalog koji se gleda do kraja.",
+      ratio: "9 / 16",
+      ratioLabel: "9:16",
+      video: "/works/sancrea-barske.mp4",
+      poster: "/works/sancrea-barske.jpg",
+      vertical: true,
+    },
+    {
+      category: "Reels",
+      title: "Veče uz živu svirku",
+      client: "Well Done",
+      desc: "Steak House Well Done. Muzika, hrana i gosti u jednom kadru, kao poziv na sledeće veče.",
+      ratio: "9 / 16",
+      ratioLabel: "9:16",
+      video: "/works/well-done-2.mp4",
+      poster: "/works/well-done-2.jpg",
       vertical: true,
     },
     {
