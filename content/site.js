@@ -62,6 +62,16 @@ export const works = {
       vertical: true,
     },
     {
+      category: "Reels",
+      title: "Savršena venčanica",
+      desc: "LovelyBride. Trenutak kada mlada pronađe svoju venčanicu, za društvene mreže salona.",
+      ratio: "9 / 16",
+      ratioLabel: "9:16",
+      video: "/works/lovelybride.mp4",
+      poster: "/works/lovelybride.jpg",
+      vertical: true,
+    },
+    {
       category: "Igrana forma",
       title: "Naziv projekta",
       desc: "Klijent. Priča iza kampanje u dve rečenice.",
