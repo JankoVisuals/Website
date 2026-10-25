@@ -90,9 +90,12 @@ export default function Home() {
           </video>
           <div className="hero-inner">
             <h1 className="rise">
-              {hero.titleBefore}
-              <em>{hero.titleEmphasis}</em>
-              {hero.titleAfter}
+              {hero.title.map((line, i) => (
+                <span key={line} className="line">
+                  {i === 1 ? <em>{line}</em> : line}
+                  {i < hero.title.length - 1 ? " " : ""}
+                </span>
+              ))}
             </h1>
             <div className="hero-actions rise d1">
               <CallButton href={site.calendly} large />

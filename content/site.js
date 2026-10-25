@@ -9,9 +9,8 @@ export const site = {
 };
 
 export const hero = {
-  titleBefore: "Video koji izgleda ",
-  titleEmphasis: "tačno",
-  titleAfter: " onako kako ste ga zamislili.",
+  // Naslov u tri takta, svaki u svom redu; drugi je u kurzivu.
+  title: ["Video kakav treba tvom biznisu.", "Za deset dana.", "Bez komplikacija."],
 };
 
 export const works = {
