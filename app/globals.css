@@ -143,12 +143,12 @@ section { scroll-margin-top: var(--header-h); }
 
 /* Hero */
 /* The first screen ends early on purpose: the top of the works feed shows below it and invites the scroll */
-.hero { --peek: clamp(220px, 34svh, 320px); position: relative; display: grid; align-content: center; overflow: hidden; isolation: isolate;
-  min-height: calc(100vh - 280px); min-height: max(420px, calc(100svh - var(--peek))); padding: calc(var(--header-h) + 24px) var(--gutter) 32px; }
+.hero { --peek: clamp(170px, 24svh, 240px); position: relative; display: grid; align-content: center; overflow: hidden; isolation: isolate;
+  min-height: calc(100vh - 220px); min-height: max(420px, calc(100svh - var(--peek))); padding: calc(var(--header-h) + 24px) var(--gutter) 32px; }
 .hero { background: #0b0b0a; }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; object-fit: cover; object-position: 50% 38%; pointer-events: none; filter: saturate(0.8) contrast(1.04); }
 .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background:
-  linear-gradient(180deg, rgba(11,11,10,0.6) 0%, rgba(11,11,10,0.25) 22%, rgba(11,11,10,0.35) 50%, rgba(11,11,10,0.9) 88%, #0b0b0a 100%),
+  linear-gradient(180deg, rgba(11,11,10,0.6) 0%, rgba(11,11,10,0.25) 22%, rgba(11,11,10,0.3) 58%, rgba(11,11,10,0.72) 86%, #0b0b0a 100%),
   radial-gradient(120% 90% at 50% 45%, rgba(11,11,10,0) 40%, rgba(11,11,10,0.6) 100%); }
 .hero-inner { display: grid; gap: 22px; justify-items: center; text-align: center; max-width: 1200px; margin-inline: auto; }
 .hero h1 { font-size: clamp(2.3rem, 5.4vw, 5.2rem); line-height: 1.02; letter-spacing: -0.015em; }
@@ -257,7 +257,7 @@ section { scroll-margin-top: var(--header-h); }
   :root { --header-h: 56px; }
   .nav { display: none; }
   .menu-btn { display: block; }
-  .hero { --peek: clamp(260px, 40svh, 380px); }
+  .hero { --peek: clamp(200px, 29svh, 280px); }
   .cta-dock { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); background: linear-gradient(180deg, rgba(11,11,10,0) 0%, rgba(11,11,10,0.9) 45%); }
   .cta-dock .btn-alloy { width: 100%; }
   .cta-dock .btn-label { flex: 1; text-align: center; padding-right: var(--knob); }
