@@ -148,22 +148,15 @@ section { scroll-margin-top: var(--header-h); }
 .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background:
   linear-gradient(180deg, rgba(11,11,10,0.6) 0%, rgba(11,11,10,0.25) 22%, rgba(11,11,10,0.35) 50%, rgba(11,11,10,0.94) 100%),
   radial-gradient(120% 90% at 50% 45%, rgba(11,11,10,0) 40%, rgba(11,11,10,0.6) 100%); }
-.slate { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 84px); left: var(--gutter); right: var(--gutter); display: flex; justify-content: space-between; color: var(--ash); }
-.rec { display: inline-flex; align-items: center; gap: 8px; }
-.rec i { width: 7px; height: 7px; border-radius: 50%; background: var(--bone); animation: blink 1.6s steps(2, start) infinite; }
-.tc { font-variant-numeric: tabular-nums; }
-.hero-inner { display: grid; gap: 22px; max-width: 1200px; }
+.hero-inner { display: grid; gap: 22px; justify-items: center; text-align: center; max-width: 1200px; margin-inline: auto; }
 .hero h1 { font-size: clamp(2.6rem, 7.2vw, 6.6rem); line-height: 0.98; letter-spacing: -0.015em; max-width: 15ch; }
 .hero h1 em { font-style: italic; }
-.hero-sub { font-size: clamp(1.05rem, 1.6vw, 1.3rem); color: var(--bone); max-width: 40ch; }
-.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; margin-top: 8px; }
-.hero-note { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 20px 28px; margin-top: 8px; }
 
 .rise { animation: rise 1s var(--ease-out) both; }
-.d1 { animation-delay: 80ms; } .d2 { animation-delay: 180ms; } .d3 { animation-delay: 280ms; } .d4 { animation-delay: 380ms; }
+.d1 { animation-delay: 140ms; }
 @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-@keyframes blink { to { visibility: hidden; } }
 
 /* Works: a Pinterest-style feed. Columns fill by height, the second column starts lower,
    and the cards carry no text; the story opens with the film. */
@@ -264,7 +257,6 @@ section { scroll-margin-top: var(--header-h); }
   .cta-dock .btn-alloy { width: 100%; }
   .cta-dock .btn-label { flex: 1; text-align: center; padding-right: var(--knob); }
   .hero { min-height: 88svh; padding-top: 120px; }
-  .slate { top: calc(env(safe-area-inset-top, 0px) + 68px); }
   .proof-grid { grid-template-columns: 1fr; }
   .tl-ruler, .track-label, .playhead { display: none; }
   .tl-tracks { display: flex; flex-direction: column; gap: 8px; }
@@ -281,7 +273,7 @@ section { scroll-margin-top: var(--header-h); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .rise, .rec i { animation: none; }
+  .rise { animation: none; }
   .frame canvas, .btn { transition: none; }
   .frame.pending { clip-path: none; }
   .menu a { transform: none; }

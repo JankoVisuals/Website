@@ -88,32 +88,18 @@ export default function Home() {
             <source src="/showreel/showreel.webm" type="video/webm" />
             <source src="/showreel/showreel.mp4" type="video/mp4" />
           </video>
-          <div className="slate mono" aria-hidden="true">
-            <span className="rec">
-              <i />
-              Showreel
-            </span>
-            <span className="tc" id="tc">
-              00:00:00:00
-            </span>
-          </div>
           <div className="hero-inner">
-            <p className="eyebrow rise">{hero.eyebrow}</p>
-            <h1 className="rise d1">
+            <h1 className="rise">
               {hero.titleBefore}
               <em>{hero.titleEmphasis}</em>
               {hero.titleAfter}
             </h1>
-            <p className="hero-sub rise d2">{hero.sub}</p>
-            <div className="hero-actions rise d3">
+            <div className="hero-actions rise d1">
               <CallButton href={site.calendly} large />
               <a className="text-link" href="#radovi">
                 Pogledajte radove
               </a>
             </div>
-          </div>
-          <div className="hero-note rise d4">
-            <span className="mono ash">{hero.proof}</span>
           </div>
         </section>
 

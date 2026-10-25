@@ -15,7 +15,6 @@ export default function Interactions() {
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const desktop = matchMedia("(min-width: 821px) and (min-height: 561px)");
     const clamp = (v, a, b) => Math.min(Math.max(v, a), b);
-    const pad = (n) => String(n).padStart(2, "0");
 
     /* Header state */
     const header = document.querySelector(".site-header");
@@ -40,26 +39,15 @@ export default function Interactions() {
     menu.querySelectorAll("a").forEach((a) => on(a, "click", () => setMenu(false)));
     on(document, "keydown", (e) => { if (e.key === "Escape" && menu.classList.contains("open")) setMenu(false); });
 
-    /* Hero: muted showreel + timecode synced to it */
+    /* Hero: muted showreel, playing only while it is on screen */
     const hv = document.querySelector(".hero-video");
-    const tcEl = document.getElementById("tc");
-    const timecode = (sec) => {
-      const f = Math.floor(sec * 25);
-      return `${pad(Math.floor(f / 90000))}:${pad(Math.floor(f / 1500) % 60)}:${pad(Math.floor(f / 25) % 60)}:${pad(f % 25)}`;
-    };
     const saveData = navigator.connection && navigator.connection.saveData;
     if (!reduce && !saveData) {
       hv.preload = "auto";
       const play = () => { const p = hv.play(); if (p) p.catch(() => {}); };
-      let raf = 0;
-      const tick = () => { tcEl.textContent = timecode(hv.currentTime); raf = requestAnimationFrame(tick); };
-      const hio = new IntersectionObserver(([e]) => {
-        cancelAnimationFrame(raf);
-        if (e.isIntersecting) { play(); raf = requestAnimationFrame(tick); }
-        else hv.pause();
-      });
+      const hio = new IntersectionObserver(([e]) => { if (e.isIntersecting) play(); else hv.pause(); });
       hio.observe(hv);
-      cleanups.push(() => { hio.disconnect(); cancelAnimationFrame(raf); hv.pause(); });
+      cleanups.push(() => { hio.disconnect(); hv.pause(); });
     }
 
     /* Work stills */

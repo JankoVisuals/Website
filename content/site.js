@@ -9,12 +9,9 @@ export const site = {
 };
 
 export const hero = {
-  eyebrow: "VSL, igrane forme i animacije proizvoda",
   titleBefore: "Video koji izgleda ",
   titleEmphasis: "tačno",
   titleAfter: " onako kako ste ga zamislili.",
-  sub: "Za 10 dana, bez agencijske cene.",
-  proof: "4× veće konverzije za SANCREA Srbija",
 };
 
 export const works = {
