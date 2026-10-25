@@ -1,10 +1,10 @@
 import Interactions from "@/components/Interactions";
 import WorksFeed from "@/components/WorksFeed";
-import { site, hero, works, proof, process, contact } from "@/content/site";
+import { site, hero, works, clients, process, contact } from "@/content/site";
 
 const nav = [
   { href: "#radovi", label: "Radovi" },
-  { href: "#rezultati", label: "Rezultati" },
+  { href: "#klijenti", label: "Klijenti" },
   { href: "#proces", label: "Proces" },
   { href: "#kontakt", label: "Kontakt" },
 ];
@@ -39,6 +39,9 @@ function CallButton({ href, large = false, label = "Zakaži poziv" }) {
     </a>
   );
 }
+
+// Wide wordmarks get shorter, square badges taller, so every logo carries about the same visual weight.
+const logoScale = (c) => Math.min(1.45, Math.max(0.7, Math.pow(c.w / c.h / 2.5, -0.38)));
 
 const days = (s) => (s.start === s.end ? `Dan ${s.start}` : `Dan ${s.start}-${s.end}`);
 
@@ -114,26 +117,21 @@ export default function Home() {
           <WorksFeed items={works.items.filter((w) => w.youtube || w.video)} />
         </section>
 
-        <section className="proof" id="rezultati" aria-labelledby="rezultati-h">
-          <h2 id="rezultati-h" className="eyebrow">
-            Rezultati
+        <section className="clients" id="klijenti" aria-labelledby="klijenti-h">
+          <h2 id="klijenti-h" className="eyebrow">
+            Klijenti
           </h2>
-          <div className="proof-grid">
-            <p className="big-num" aria-label={`${proof.number} puta`}>
-              {proof.number}
-              <span>×</span>
-            </p>
-            <div>
-              <p className="proof-line">{proof.line}</p>
-              <p className="mono ash">{proof.client}</p>
-            </div>
-          </div>
-          <ul className="clients" aria-label="Klijenti">
-            {proof.clients.map((c) => (
-              <li key={c}>{c}</li>
+          <div className="marquee">
+            {[0, 1].map((copy) => (
+              <ul key={copy} className="marquee-row" aria-hidden={copy === 1 || undefined}>
+                {clients.map((c) => (
+                  <li key={c.src} style={{ "--logo-h": logoScale(c).toFixed(3) }}>
+                    <img src={c.src} width={c.w} height={c.h} alt={copy === 1 ? "" : c.name} loading="lazy" decoding="async" />
+                  </li>
+                ))}
+              </ul>
             ))}
-            <li className="more">i drugi</li>
-          </ul>
+          </div>
         </section>
 
         <section className="process" id="proces" aria-labelledby="proces-h">

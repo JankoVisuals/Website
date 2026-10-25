@@ -1,4 +1,4 @@
-/* Layout: full-bleed showreel, a pinned horizontal reel of works, one proof number,
+/* Layout: full-bleed showreel, a pinned horizontal reel of works, a slow strip of client logos,
    the 10-day process drawn as an edit timeline, contact. "Zakaži poziv" in the hero docks at the bottom until the contact button takes over. */
 :root {
   --ink: #0b0b0a;
@@ -190,14 +190,15 @@ section { scroll-margin-top: var(--header-h); }
 .count { font-variant-numeric: tabular-nums; }
 
 /* Proof */
-.proof { padding: clamp(96px, 14vh, 160px) var(--gutter); border-top: 1px solid var(--line); display: grid; gap: 56px; }
-.proof-grid { display: grid; grid-template-columns: auto 1fr; align-items: end; gap: 24px 48px; }
-.big-num { font-family: var(--font-display); font-size: clamp(8rem, 24vw, 19rem); line-height: 0.78; letter-spacing: -0.04em; }
-.big-num span { font-style: italic; font-size: 0.6em; margin-left: 0.04em; }
-.proof-line { font-family: var(--font-display); font-size: clamp(1.6rem, 3.2vw, 2.6rem); line-height: 1.1; max-width: 16ch; margin-bottom: 14px; }
-.clients { list-style: none; margin: 0; padding: 28px 0 0; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px 56px; }
-.clients li { font-size: clamp(1.1rem, 2vw, 1.5rem); font-weight: 500; letter-spacing: -0.01em; color: var(--bone); }
-.clients .more { font-family: var(--font-display); font-style: italic; font-weight: 400; color: var(--ash); }
+.clients { padding: clamp(96px, 14vh, 160px) 0; border-top: 1px solid var(--line); display: grid; gap: clamp(40px, 6vh, 64px); }
+.clients .eyebrow { padding: 0 var(--gutter); }
+/* Two identical rows slide left by exactly one row width, so the loop has no seam. */
+.marquee { --logo-base: clamp(30px, 3.4vw, 46px); --gap: clamp(56px, 8vw, 120px); display: flex; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.marquee-row { list-style: none; margin: 0; padding: 0 var(--gap) 0 0; display: flex; flex: none; align-items: center; gap: var(--gap); animation: marquee 48s linear infinite; }
+.marquee-row li { flex: none; display: flex; }
+.marquee-row img { display: block; width: auto; height: calc(var(--logo-base) * var(--logo-h)); opacity: 0.86; user-select: none; -webkit-user-drag: none; }
+@keyframes marquee { to { transform: translateX(-100%); } }
+@media (hover: hover) and (pointer: fine) { .marquee:hover .marquee-row { animation-play-state: paused; } }
 
 /* Process as an edit timeline */
 .process { padding: clamp(96px, 14vh, 160px) var(--gutter); border-top: 1px solid var(--line); display: grid; gap: 48px; }
@@ -260,7 +261,6 @@ section { scroll-margin-top: var(--header-h); }
   .cta-dock { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 12px); background: linear-gradient(180deg, rgba(11,11,10,0) 0%, rgba(11,11,10,0.9) 45%); }
   .cta-dock .btn-alloy { width: 100%; }
   .cta-dock .btn-label { flex: 1; text-align: center; padding-right: var(--knob); }
-  .proof-grid { grid-template-columns: 1fr; }
   .tl-ruler, .track-label, .playhead { display: none; }
   .tl-tracks { display: flex; flex-direction: column; gap: 8px; }
   .tl-track { display: contents; }
@@ -319,5 +319,8 @@ section { scroll-margin-top: var(--header-h); }
 @media (prefers-reduced-motion: reduce) {
   .frame .poster img, .frame .poster video { transition: none; }
   .feed.ready { animation: none; }
+  .marquee { -webkit-mask-image: none; mask-image: none; }
+  .marquee-row { animation: none; flex: 1; flex-wrap: wrap; justify-content: center; padding: 0 var(--gutter); row-gap: 40px; }
+  .marquee-row[aria-hidden] { display: none; }
 }
 html:has(.theater[open]) { overflow: hidden; }

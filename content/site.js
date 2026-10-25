@@ -76,12 +76,16 @@ export const works = {
   ],
 };
 
-export const proof = {
-  number: "4",
-  line: "veće konverzije, dugoročno.",
-  client: "SANCREA Srbija",
-  clients: ["Tech Tailors", "Philips", "Tenderly"],
-};
+// Logoi klijenata za traku. Novi logo: beli PNG bez pozadine u public/clients,
+// pa jedan red ovde sa stvarnom širinom i visinom fajla (veličina se sama ujednačava).
+export const clients = [
+  { name: "Philips", src: "/clients/philips.png", w: 1307, h: 240 },
+  { name: "SANCREA Srbija", src: "/clients/sancrea.png", w: 1060, h: 240 },
+  { name: "LovelyBride", src: "/clients/lovelybride.png", w: 389, h: 240 },
+  { name: "Schneider Electric Serbia Business Run & Walk", src: "/clients/schneider-business-run.png", w: 931, h: 240 },
+  { name: "Kimura Jiu-Jitsu Academy", src: "/clients/kimura.png", w: 240, h: 240 },
+  { name: "Gorila", src: "/clients/gorila.png", w: 342, h: 240 },
+];
 
 export const process = {
   title: "Gotov video za 10 dana.",
