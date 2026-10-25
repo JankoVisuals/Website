@@ -1,21 +1,9 @@
-import { Newsreader, Schibsted_Grotesk } from "next/font/google";
 import { site } from "@/content/site";
 import "./globals.css";
 
-const display = Newsreader({
-  subsets: ["latin", "latin-ext"],
-  style: ["normal", "italic"],
-  axes: ["opsz"],
-  variable: "--font-newsreader",
-  display: "swap",
-});
-
-const body = Schibsted_Grotesk({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600"],
-  variable: "--font-schibsted",
-  display: "swap",
-});
+// Clash Display (Indian Type Foundry, free for commercial use) served by Fontshare: only the two cuts in use,
+// Bold 700 for headings and Extralight 200 for the rest of the copy.
+const clashDisplay = "https://api.fontshare.com/v2/css?f[]=clash-display@200,700&display=swap";
 
 export const metadata = {
   title: site.name,
@@ -38,7 +26,12 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="sr" className={`${display.variable} ${body.variable}`}>
+    <html lang="sr">
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
+        <link rel="stylesheet" href={clashDisplay} />
+      </head>
       <body>{children}</body>
     </html>
   );
