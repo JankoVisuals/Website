@@ -2,6 +2,7 @@
 
 export const site = {
   name: "Janko Visuals",
+  url: "https://jankovisuals.vercel.app",
   email: "jankovisuals@gmail.com",
   calendly: "https://calendly.com/jankovisuals/30min",
   description:

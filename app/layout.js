@@ -6,9 +6,12 @@ import "./globals.css";
 const clashDisplay = "https://api.fontshare.com/v2/css?f[]=clash-display@200,700&display=swap";
 
 export const metadata = {
+  metadataBase: new URL(site.url),
   title: site.name,
   description: site.description,
+  alternates: { canonical: "/" },
   openGraph: {
+    url: site.url,
     title: site.name,
     description: site.description,
     locale: "sr_RS",

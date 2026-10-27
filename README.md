@@ -1,6 +1,6 @@
 # Janko Visuals
 
-Sajt za Janko Visuals, napravljen u Next.js. Svaki push na `main` granu Vercel automatski objavljuje.
+Sajt za Janko Visuals, napravljen u Next.js. Svaki push na `main` granu Vercel automatski objavljuje na https://jankovisuals.vercel.app.
 
 ## Gde se šta menja
 
